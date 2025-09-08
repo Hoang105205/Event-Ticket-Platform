@@ -1,9 +1,0 @@
-target/
-.mvn/
-mvnw
-mvnw.cmd
-.idea/
-*.iml
-.env.properties
-README.md
-.git/
