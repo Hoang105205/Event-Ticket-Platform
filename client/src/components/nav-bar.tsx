@@ -17,6 +17,8 @@ import {
   Search,
   Ticket,
   QrCode,
+  ShieldCheck,
+  Users,
 } from "lucide-react";
 import { useRoles } from "@/hooks/use-roles";
 import { Link, useNavigate } from "react-router";
@@ -24,7 +26,7 @@ import { Link, useNavigate } from "react-router";
 const NavBar: React.FC = () => {
   const { user, signoutRedirect, isAuthenticated, isLoading: isAuthLoading } =
     useAuth();
-  const { isOrganizer, isAttendee, isStaff, isLoading: isRolesLoading } = useRoles();
+  const { isAdministrator, isOrganizer, isAttendee, isStaff, isLoading: isRolesLoading } = useRoles();
   const navigate = useNavigate();
 
   const isLoading = isAuthLoading || isRolesLoading;
@@ -110,6 +112,30 @@ const NavBar: React.FC = () => {
                     </Button>
                   </>
                 )}
+
+                {/* Administrator Navigation - Admin features */}
+                {isAdministrator && (
+                  <>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleNavigation("/dashboard/administration")}
+                      className="text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-yellow-600/20 hover:to-orange-600/20 border border-transparent hover:border-yellow-500/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-yellow-500/20"
+                    >
+                      <ShieldCheck className="w-4 h-4 mr-2 text-yellow-400" />
+                      Admin Dashboard
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleNavigation("/dashboard/administration/manage-users")}
+                      className="text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-blue-600/20 hover:to-green-600/20 border border-transparent hover:border-blue-500/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20"
+                    >
+                      <Users className="w-4 h-4 mr-2 text-blue-400" />
+                      Manage Users
+                    </Button>
+                  </>
+                )}
               </nav>
             )}
           </div>
@@ -191,6 +217,11 @@ const NavBar: React.FC = () => {
                         {isStaff && (
                           <span className="px-2 py-1 bg-orange-600/20 text-orange-300 text-xs rounded-full border border-orange-500/30">
                             Staff
+                          </span>
+                        )}
+                        {isAdministrator && (
+                          <span className="px-2 py-1 bg-yellow-600/20 text-yellow-300 text-xs rounded-full border border-yellow-500/30">
+                            Admin
                           </span>
                         )}
                       </div>

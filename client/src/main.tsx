@@ -5,17 +5,29 @@ import { AuthProvider } from "react-oidc-context";
 
 import ProtectedRoute from "@/components/protected-route";
 
+// General pages
 import AttendeeLandingPage from "./pages/attendee-landing-page.tsx";
 import CallbackPage from "./pages/callback-page.tsx";
-import DashboardListEventsPage from "./pages/dashboard-list-events-page.tsx";
-import DashboardListTickets from "./pages/dashboard-list-tickets.tsx";
-import DashboardManageEventPage from "./pages/dashboard-manage-event-page.tsx";
 import DashboardPage from "./pages/dashboard-page.tsx";
-import DashboardValidateQrPage from "./pages/dashboard-validate-qr-page.tsx";
-import DashboardViewTicketPage from "./pages/dashboard-view-ticket-page.tsx";
 import LoginPage from "./pages/login-page.tsx";
 import PublishedEventsPage from "./pages/published-events-page.tsx";
-import PurchaseTicketPage from "./pages/purchase-ticket-page.tsx";
+
+// Administrator pages
+import AdministrationDashboardPage from "./pages/administrator/administration-dashboard-page.tsx";
+import AdministrationManageUsersPage from "./pages/administrator/administration-manage-users-page.tsx";
+
+// Organizer pages
+import OrganizerEventsListpage from "./pages/organizer/organizer-events-list-page.tsx";
+import OrganizerManageEventPage from "./pages/organizer/organizer-manage-event-page.tsx";
+
+// Attendee pages
+import AttendeeTicketListPage from "./pages/attendee/attendee-tickets-list-page.tsx";
+import AttendeeTicketDetailsPage from "./pages/attendee/attendee-ticket-details-page.tsx";
+import AttendeePurchaseTicketPage from "./pages/attendee/attendee-purchase-ticket-page.tsx";
+
+// Staff pages
+import StaffValidateQrPage from "./pages/staff/staff-validate-qr-page.tsx";
+
 
 import Layout from "@/components/layout";
 
@@ -73,13 +85,37 @@ export const router = createBrowserRouter([
     ),
   },
 
+  // Administrator - Platform Management
+  {
+    path: "/dashboard/administration",
+    element: (
+      <Layout>
+        <ProtectedRoute allowedRoles={['administrator']}>
+          <AdministrationDashboardPage />
+        </ProtectedRoute>
+      </Layout>
+    ),
+  },
+
+  {
+    path: "/dashboard/administration/manage-users",
+    element: (
+      <Layout>
+        <ProtectedRoute allowedRoles={['administrator']}>
+          <AdministrationManageUsersPage />
+        </ProtectedRoute>
+      </Layout>
+    ),
+  },
+
+
   // Organizer - Event Management
   {
     path: "/dashboard/events",
     element: (
       <Layout>
         <ProtectedRoute allowedRoles={['organizer']}>
-          <DashboardListEventsPage />
+          <OrganizerEventsListpage />
         </ProtectedRoute>
       </Layout>
     ),
@@ -89,7 +125,7 @@ export const router = createBrowserRouter([
     element: (
       <Layout>
         <ProtectedRoute allowedRoles={['organizer']}>
-          <DashboardManageEventPage />
+          <OrganizerManageEventPage />
         </ProtectedRoute>
       </Layout>
     ),
@@ -99,7 +135,7 @@ export const router = createBrowserRouter([
     element: (
       <Layout>
         <ProtectedRoute allowedRoles={['organizer']}>
-          <DashboardManageEventPage />
+          <OrganizerManageEventPage />
         </ProtectedRoute>
       </Layout>
     ),
@@ -111,7 +147,7 @@ export const router = createBrowserRouter([
     element: (
       <Layout>
         <ProtectedRoute allowedRoles={['attendee']}>
-          <DashboardListTickets />
+          <AttendeeTicketListPage />
         </ProtectedRoute>
       </Layout>
     ),
@@ -121,7 +157,7 @@ export const router = createBrowserRouter([
     element: (
       <Layout>
         <ProtectedRoute allowedRoles={['attendee']}>
-          <DashboardViewTicketPage />
+          <AttendeeTicketDetailsPage />
         </ProtectedRoute>
       </Layout>
     ),
@@ -132,7 +168,7 @@ export const router = createBrowserRouter([
     element: (
       <Layout>
         <ProtectedRoute allowedRoles={['attendee']}>
-          <PurchaseTicketPage />
+          <AttendeePurchaseTicketPage />
         </ProtectedRoute>
       </Layout>
     ),
@@ -144,7 +180,7 @@ export const router = createBrowserRouter([
     element: (
       <Layout>
         <ProtectedRoute allowedRoles={['staff']}>
-          <DashboardValidateQrPage />
+          <StaffValidateQrPage />
         </ProtectedRoute>
       </Layout>
     ),

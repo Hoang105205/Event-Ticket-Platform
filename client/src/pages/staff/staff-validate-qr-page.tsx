@@ -13,7 +13,7 @@ import { useAuth } from "react-oidc-context";
 import jsQR from "jsqr";
 import { motion, AnimatePresence } from "framer-motion";
 
-const DashboardValidateQrPage: React.FC = () => {
+const StaffValidateQrPage: React.FC = () => {
     const { isLoading, user } = useAuth();
     const [hasCamera, setHasCamera] = useState(false);
     const [mode, setMode] = useState<"camera" | "upload" | "manual">("camera");
@@ -310,4 +310,4 @@ const DashboardValidateQrPage: React.FC = () => {
     );
 };
 
-export default DashboardValidateQrPage;
+export default StaffValidateQrPage;

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { useNavigate, useParams } from "react-router";
 
-const PurchaseTicketPage: React.FC = () => {
+const AttendeePurchaseTicketPage: React.FC = () => {
   const { eventId, ticketTypeId } = useParams();
   const { isLoading, user } = useAuth();
   const navigate = useNavigate();
@@ -324,4 +324,4 @@ const PurchaseTicketPage: React.FC = () => {
   );
 };
 
-export default PurchaseTicketPage;
+export default AttendeePurchaseTicketPage;

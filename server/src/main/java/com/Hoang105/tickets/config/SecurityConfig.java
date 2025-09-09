@@ -47,6 +47,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize ->
                 authorize
                     .requestMatchers(HttpMethod.GET, "/api/v1/published-events/**").permitAll()
+                    .requestMatchers("/api/v1/users/**").hasRole("ADMINISTRATOR")
                     .requestMatchers("/api/v1/events").hasRole("ORGANIZER")
                     .requestMatchers("/api/v1/ticket-validations").hasRole("STAFF")
                     .anyRequest().authenticated())

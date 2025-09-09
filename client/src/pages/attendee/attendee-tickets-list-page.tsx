@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router";
 
 import { TicketStatus } from "@/domain/domain";
 
-const DashboardListTickets: React.FC = () => {
+const AttendeeTicketListPage: React.FC = () => {
   const { isLoading, user } = useAuth();
   const navigate = useNavigate();
 
@@ -167,4 +167,4 @@ const DashboardListTickets: React.FC = () => {
   );
 };
 
-export default DashboardListTickets;
+export default AttendeeTicketListPage;

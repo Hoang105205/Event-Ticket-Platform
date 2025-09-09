@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 interface UseRolesReturn {
   isLoading: boolean;
   role: string;
+  isAdministrator: boolean;
   isOrganizer: boolean;
   isAttendee: boolean;
   isStaff: boolean;
@@ -20,6 +21,7 @@ export const useRoles = (): UseRolesReturn => {
   const { isLoading: isAuthLoading, user } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [role, setRole] = useState<string>("");
+  const [isAdministrator, setIsAdministrator] = useState(false);
   const [isOrganizer, setIsOrganizer] = useState(false);
   const [isAttendee, setIsAttendee] = useState(false);
   const [isStaff, setIsStaff] = useState(false);
@@ -29,6 +31,7 @@ export const useRoles = (): UseRolesReturn => {
 
     if (isAuthLoading || !user?.access_token) {
       setRole("");
+      setIsAdministrator(false);
       setIsOrganizer(false);
       setIsAttendee(false);
       setIsStaff(false);
@@ -41,22 +44,27 @@ export const useRoles = (): UseRolesReturn => {
       const allRoles = payload.realm_access?.roles || [];
       const filteredRoles = allRoles.filter((role) => role.startsWith("ROLE_"));
 
-      // Priority: Organizer > Staff > Attendee
+      // Priority: Administrator > Organizer > Staff > Attendee
       const roleMap = [
+        {
+          keycloakRole: "ROLE_ADMINISTRATOR",
+          role: "administrator",
+          flags: { isAdministrator: true, isOrganizer: false, isStaff: false, isAttendee: false },
+        },
         {
           keycloakRole: "ROLE_ORGANIZER",
           role: "organizer",
-          flags: { isOrganizer: true, isStaff: false, isAttendee: false },
+          flags: { isAdministrator: false, isOrganizer: true, isStaff: false, isAttendee: false },
         },
         {
           keycloakRole: "ROLE_STAFF",
           role: "staff",
-          flags: { isOrganizer: false, isStaff: true, isAttendee: false },
+          flags: { isAdministrator: false, isOrganizer: false, isStaff: true, isAttendee: false },
         },
         {
           keycloakRole: "ROLE_ATTENDEE",
           role: "attendee",
-          flags: { isOrganizer: false, isStaff: false, isAttendee: true },
+          flags: { isAdministrator: false, isOrganizer: false, isStaff: false, isAttendee: true },
         },
       ];
 
@@ -65,19 +73,21 @@ export const useRoles = (): UseRolesReturn => {
 
       if (matchedRole) {
         setRole(matchedRole.role);
+        setIsAdministrator(matchedRole.flags.isAdministrator);
         setIsOrganizer(matchedRole.flags.isOrganizer);
         setIsStaff(matchedRole.flags.isStaff);
         setIsAttendee(matchedRole.flags.isAttendee);
       } else {
         setRole("");
+        setIsAdministrator(false);
         setIsOrganizer(false);
         setIsStaff(false);
         setIsAttendee(false);
       }
-      
     } catch (error) {
       console.error("Error parsing JWT: " + error);
       setRole("");
+      setIsAdministrator(false);
       setIsOrganizer(false);
       setIsAttendee(false);
       setIsStaff(false);
@@ -89,6 +99,7 @@ export const useRoles = (): UseRolesReturn => {
   return {
     isLoading,
     role,
+    isAdministrator,
     isOrganizer,
     isAttendee,
     isStaff,

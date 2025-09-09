@@ -38,7 +38,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { Link } from "react-router";
 
-const DashboardListEventsPage: React.FC = () => {
+const OrganizerEventsListpage: React.FC = () => {
   const { isLoading, user } = useAuth();
   const [events, setEvents] = useState<
     SpringBootPagination<EventSummary> | undefined
@@ -432,4 +432,4 @@ const DashboardListEventsPage: React.FC = () => {
   );
 };
 
-export default DashboardListEventsPage;
+export default OrganizerEventsListpage;

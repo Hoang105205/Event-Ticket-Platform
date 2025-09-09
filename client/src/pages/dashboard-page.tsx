@@ -3,12 +3,17 @@ import { useNavigate } from "react-router";
 import { useEffect } from "react";
 
 const DashboardPage: React.FC = () => {
-  const { isLoading, isOrganizer, isStaff } = useRoles();
+  const { isLoading, isAdministrator, isOrganizer, isStaff } = useRoles();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (isLoading) return; // Wait for roles to load
 
+    if (isAdministrator) {
+      navigate("/dashboard/administration", { replace: true });
+      return;
+    }
+    
     if (isOrganizer) {
       navigate("/dashboard/events", { replace: true });
       return;

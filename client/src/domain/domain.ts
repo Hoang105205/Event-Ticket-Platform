@@ -201,5 +201,13 @@ export interface TicketValidationResponse {
   status: TicketValidationStatus;
 }
 
+export interface UserGeneralProfile {
+  id: string;
+  name: string;
+  email: string;
+  totalTickets: number;
+  lastPurchaseDate?: Date;
+}
+
 
 

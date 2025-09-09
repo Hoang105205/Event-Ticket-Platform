@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { useParams, useNavigate } from "react-router";
 
-const DashboardViewTicketPage: React.FC = () => {
+const AttendeeTicketDetailsPage: React.FC = () => {
   const [ticket, setTicket] = useState<TicketDetails | undefined>();
   const [qrCodeUrl, setQrCodeUrl] = useState<string | undefined>();
   const [isQrLoading, setIsQrCodeLoading] = useState(true);
@@ -199,4 +199,4 @@ const DashboardViewTicketPage: React.FC = () => {
   );
 };
 
-export default DashboardViewTicketPage;
+export default AttendeeTicketDetailsPage;

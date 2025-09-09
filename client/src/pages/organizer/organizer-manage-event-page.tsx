@@ -148,7 +148,7 @@ interface EventData {
   updatedAt: Date | undefined;
 }
 
-const DashboardManageEventPage: React.FC = () => {
+const OrganizerManageEventPage: React.FC = () => {
   const { isLoading, user } = useAuth();
   const { id } = useParams();
   const isEditMode = !!id;
@@ -929,4 +929,4 @@ const DashboardManageEventPage: React.FC = () => {
   );
 };
 
-export default DashboardManageEventPage;
+export default OrganizerManageEventPage;

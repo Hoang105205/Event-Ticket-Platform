@@ -11,6 +11,7 @@ import {
   TicketValidationRequest,
   TicketValidationResponse,
   UpdateEventRequest,
+  UserGeneralProfile,
 } from "@/domain/domain";
 import api from "@/config/axios";
 
@@ -264,6 +265,31 @@ export const validateTicket = async (
       },
     });
     return response.data as TicketValidationResponse;
+  } catch (error: any) {
+    if (error.response?.data && isErrorResponse(error.response.data)) {
+      throw new Error(error.response.data.error);
+    } else {
+      console.error(error);
+      throw new Error("An unknown error occurred");
+    }
+  }
+};
+
+export const fetchAttendeeList = async (
+  accessToken: string,
+  page: number = 0,
+  size: number = 10
+): Promise<SpringBootPagination<UserGeneralProfile>> => {
+  try {
+    const response = await api.get(
+      `/api/v1/users/attendees?page=${page}&size=${size}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response.data as SpringBootPagination<UserGeneralProfile>;
   } catch (error: any) {
     if (error.response?.data && isErrorResponse(error.response.data)) {
       throw new Error(error.response.data.error);

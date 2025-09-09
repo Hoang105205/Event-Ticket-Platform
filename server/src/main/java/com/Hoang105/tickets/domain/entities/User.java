@@ -28,6 +28,10 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private UserRoleEnum role;
+
     @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
     private List<Event> organizedEvents = new ArrayList<>();
 

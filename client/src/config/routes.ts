@@ -1,11 +1,12 @@
-type KeycloakRole = "ROLE_ORGANIZER" | "ROLE_ATTENDEE" | "ROLE_STAFF";
+type KeycloakRole = "ROLE_ADMINISTRATOR" | "ROLE_ORGANIZER" | "ROLE_ATTENDEE" | "ROLE_STAFF";
 
 // Internal route system types (simplified)
-export type UserRole = 'staff' | 'organizer' | 'attendee';
+export type UserRole = 'administrator' | 'organizer' | 'staff' | 'attendee';
 
 // Adapter: Convert từ Keycloak roles sang internal roles
 export const mapKeycloakRoleToUserRole = (keycloakRoles: string[]): UserRole => {
-  // Priority: STAFF > ORGANIZER > ATTENDEE
+  // Priority: ADMINISTRATOR > ORGANIZER > STAFF > ATTENDEE
+  if (keycloakRoles.includes("ROLE_ADMINISTRATOR")) return 'administrator';
   if (keycloakRoles.includes("ROLE_ORGANIZER")) return 'organizer';
   if (keycloakRoles.includes("ROLE_STAFF")) return 'staff';
   return 'attendee'; // Default
@@ -14,8 +15,9 @@ export const mapKeycloakRoleToUserRole = (keycloakRoles: string[]): UserRole => 
 // Reverse mapping: Internal role to Keycloak roles
 export const mapUserRoleToKeycloakRoles = (userRole: UserRole): KeycloakRole[] => {
   switch (userRole) {
-    case 'staff': return ["ROLE_STAFF"];
+    case 'administrator': return ["ROLE_ADMINISTRATOR"];
     case 'organizer': return ["ROLE_ORGANIZER"];
+    case 'staff': return ["ROLE_STAFF"];
     case 'attendee': return ["ROLE_ATTENDEE"];
     default: return ["ROLE_ATTENDEE"];
   }
@@ -40,11 +42,31 @@ export const ROUTES_CONFIG: RouteConfig[] = [
   // Dashboard routes
   {
   path: '/dashboard',
-  allowedRoles: ['staff', 'organizer', 'attendee'],
+  allowedRoles: ['staff', 'organizer', 'attendee', 'administrator'],
   label: 'Dashboard',
   icon: 'LayoutDashboard',
   description: 'Overview and quick actions'
   },
+
+  // Administrator routes
+  {
+    path: '/dashboard/administration',
+    allowedRoles: ['administrator'],
+    label: 'Manage Platform',
+    icon: 'ShieldCheck',
+    description: 'Manage platform settings and users'
+  },
+
+  {
+    path: '/dashboard/administration/manage-users',
+    allowedRoles: ['administrator'],
+    label: 'Manage Users',
+    icon: 'Users',
+    description: 'Manage users in the platform'
+  },
+
+
+
 
   // Organizer routes
   {
@@ -125,14 +147,16 @@ export const canUserAccessRoute = (userKeycloakRoles: string[], path: string): b
 
 // Default paths với simplified roles
 export const DEFAULT_PATHS: Record<UserRole, string> = {
+  administrator: '/dashboard',
+  organizer: '/dashboard',
   staff: '/dashboard',
-  organizer: '/dashboard', 
   attendee: '/dashboard'
 };
 
 export const FALLBACK_PATHS: Record<UserRole, string> = {
-  staff: '/dashboard',
+  administrator: '/dashboard',
   organizer: '/dashboard',
+  staff: '/dashboard',
   attendee: '/'
 };
 
