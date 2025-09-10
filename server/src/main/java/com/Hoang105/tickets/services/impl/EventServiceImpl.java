@@ -17,7 +17,7 @@ import com.Hoang105.tickets.domain.CreateEventRequest;
 import com.Hoang105.tickets.domain.UpdateEventRequest;
 import com.Hoang105.tickets.domain.UpdateTicketTypeRequest;
 import com.Hoang105.tickets.domain.entities.Event;
-import com.Hoang105.tickets.domain.entities.EventStatusEnum;
+import com.Hoang105.tickets.domain.entities.enums.EventStatusEnum;
 import com.Hoang105.tickets.domain.entities.TicketType;
 import com.Hoang105.tickets.domain.entities.User;
 import com.Hoang105.tickets.exceptions.EventNotFoundException;

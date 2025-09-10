@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.Hoang105.tickets.domain.entities.Ticket;
-import com.Hoang105.tickets.domain.entities.TicketStatusEnum;
+import com.Hoang105.tickets.domain.entities.enums.TicketStatusEnum;
 import com.Hoang105.tickets.domain.entities.TicketType;
 import com.Hoang105.tickets.domain.entities.User;
 import com.Hoang105.tickets.exceptions.TicketTypetNotFoundException;

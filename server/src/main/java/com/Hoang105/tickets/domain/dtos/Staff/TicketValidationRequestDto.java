@@ -1,6 +1,6 @@
-package com.Hoang105.tickets.domain.dtos;
+package com.Hoang105.tickets.domain.dtos.Staff;
 
-import com.Hoang105.tickets.domain.entities.TicketValidationMethodEnum;
+import com.Hoang105.tickets.domain.entities.enums.TicketValidationMethodEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

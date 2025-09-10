@@ -1,7 +1,7 @@
 package com.Hoang105.tickets.repositories;
 
 import com.Hoang105.tickets.domain.entities.Event;
-import com.Hoang105.tickets.domain.entities.EventStatusEnum;
+import com.Hoang105.tickets.domain.entities.enums.EventStatusEnum;
 
 import java.util.Optional;
 import java.util.UUID;

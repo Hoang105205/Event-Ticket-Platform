@@ -10,7 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.Hoang105.tickets.domain.dtos.ErrorDto;
+import com.Hoang105.tickets.domain.dtos.Error.ErrorDto;
 import com.Hoang105.tickets.exceptions.*;
 
 import jakarta.validation.ConstraintViolationException;

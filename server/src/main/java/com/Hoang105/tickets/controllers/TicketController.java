@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Hoang105.tickets.domain.dtos.GetTicketResponseDto;
-import com.Hoang105.tickets.domain.dtos.ListTicketResponseDto;
+import com.Hoang105.tickets.domain.dtos.Attendee.GetTicketResponseDto;
+import com.Hoang105.tickets.domain.dtos.Attendee.ListTicketResponseDto;
 import com.Hoang105.tickets.domain.entities.Ticket;
 import com.Hoang105.tickets.mappers.TicketMapper;
 import com.Hoang105.tickets.services.QrCodeService;

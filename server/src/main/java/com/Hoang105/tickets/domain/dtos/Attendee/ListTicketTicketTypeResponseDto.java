@@ -1,4 +1,4 @@
-package com.Hoang105.tickets.domain.dtos;
+package com.Hoang105.tickets.domain.dtos.Attendee;
 
 import java.util.UUID;
 

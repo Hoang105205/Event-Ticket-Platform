@@ -1,5 +1,6 @@
 package com.Hoang105.tickets.mappers;
 
+import com.Hoang105.tickets.domain.dtos.Organizer.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

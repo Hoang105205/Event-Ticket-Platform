@@ -1,4 +1,6 @@
-package com.Hoang105.tickets.domain.dtos;
+package com.Hoang105.tickets.domain.dtos.Organizer;
+
+import java.util.UUID;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -10,7 +12,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateTicketTypeRequestDto {
+public class UpdateTicketTypeRequestDto {
+
+    private UUID id;
 
     @NotBlank(message =  "Ticket type name is required")
     private String name;

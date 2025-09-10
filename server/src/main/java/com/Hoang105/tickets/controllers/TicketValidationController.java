@@ -1,9 +1,9 @@
 package com.Hoang105.tickets.controllers;
 
-import com.Hoang105.tickets.domain.dtos.TicketValidationRequestDto;
-import com.Hoang105.tickets.domain.dtos.TicketValidationResponseDto;
+import com.Hoang105.tickets.domain.dtos.Staff.TicketValidationRequestDto;
+import com.Hoang105.tickets.domain.dtos.Staff.TicketValidationResponseDto;
 import com.Hoang105.tickets.domain.entities.TicketValidation;
-import com.Hoang105.tickets.domain.entities.TicketValidationMethodEnum;
+import com.Hoang105.tickets.domain.entities.enums.TicketValidationMethodEnum;
 import com.Hoang105.tickets.mappers.TicketValidationMapper;
 import com.Hoang105.tickets.services.TicketValidationService;
 import lombok.RequiredArgsConstructor;

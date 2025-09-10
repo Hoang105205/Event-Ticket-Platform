@@ -2,7 +2,8 @@ package com.Hoang105.tickets.services.impl;
 
 import com.Hoang105.tickets.domain.entities.Ticket;
 import com.Hoang105.tickets.domain.entities.User;
-import com.Hoang105.tickets.domain.entities.UserRoleEnum;
+import com.Hoang105.tickets.domain.entities.enums.UserRoleEnum;
+import com.Hoang105.tickets.exceptions.UserNotFoundException;
 import com.Hoang105.tickets.repositories.TicketRepository;
 import com.Hoang105.tickets.repositories.UserRepository;
 import com.Hoang105.tickets.services.UserService;
@@ -36,6 +37,12 @@ public class UserServiceImpl implements UserService {
         return ticketRepository.findFirstByPurchaserIdOrderByCreatedAtDesc(id)
                 .map(Ticket::getCreatedAt)
                 .orElse(null);
+    }
+
+    @Override
+    public User getUserById(UUID id) {
+        return userRepository.findById(id)
+                .orElseThrow(UserNotFoundException::new);
     }
 
 

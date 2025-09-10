@@ -3,7 +3,7 @@ package com.Hoang105.tickets.repositories;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.Hoang105.tickets.domain.entities.QrCodeStatusEnum;
+import com.Hoang105.tickets.domain.entities.enums.QrCodeStatusEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -6,12 +6,14 @@ import { useAuth } from "react-oidc-context";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SimplePagination } from "@/components/simple-pagination";
+import { useNavigate } from "react-router-dom";
 
 const AdministrationViewAttendeesPage = () => {
   const { user, isLoading: isAuthLoading } = useAuth();
   const [attendeePagination, setAttendeePagination] = useState<SpringBootPagination<UserGeneralProfile>>();
   const [error, setError] = useState<string | undefined>();
   const [page, setPage] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isAuthLoading || !user?.access_token) return;
@@ -56,7 +58,14 @@ const AdministrationViewAttendeesPage = () => {
             attendeePagination.content.map((attendee) => (
               <Card
                 key={attendee.id}
-                className="bg-gray-800 border border-gray-700 rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between hover:border-blue-400/60 transition-all duration-200 animate-fade-in-up"
+                className="bg-gray-800 border border-gray-700 rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between hover:border-blue-400/60 transition-all duration-200 animate-fade-in-up cursor-pointer"
+                onClick={() => navigate(`/dashboard/administration/manage-users/${attendee.id}`)}
+                tabIndex={0}
+                onKeyDown={e => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    navigate(`/dashboard/administration/manage-users/${attendee.id}`);
+                  }
+                }}
               >
                 <div>
                   <div className="flex items-center gap-3 mb-1">
@@ -76,7 +85,7 @@ const AdministrationViewAttendeesPage = () => {
                   {attendee.lastPurchaseDate && (
                     <div className="text-gray-400 text-xs mt-1">
                       Last purchase:{" "}
-                      {new Date(attendee.lastPurchaseDate).toLocaleString()}
+                      {new Date(attendee.lastPurchaseDate + "Z").toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" })}
                     </div>
                   )}
                 </div>

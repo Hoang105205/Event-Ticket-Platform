@@ -1,9 +1,9 @@
-package com.Hoang105.tickets.domain.dtos;
+package com.Hoang105.tickets.domain.dtos.Attendee;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import com.Hoang105.tickets.domain.entities.TicketStatusEnum;
+import com.Hoang105.tickets.domain.entities.enums.TicketStatusEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -209,5 +209,21 @@ export interface UserGeneralProfile {
   lastPurchaseDate?: Date;
 }
 
+export interface UserDetailProfile extends UserGeneralProfile {
+    // No additional fields for now
+}
+
+export interface UserTicketDetails {
+  id: string;
+  status: TicketStatus;
+  createdAt: Date;
+  ticketType_name: string;
+  ticketType_price: number;
+  ticketType_description: string;
+  ticketType_event_name: string;
+  ticketType_event_venue: string;
+  ticketType_event_start: Date;
+  ticketType_event_end: Date;
+}
 
 

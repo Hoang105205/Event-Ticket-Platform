@@ -15,6 +15,7 @@ import PublishedEventsPage from "./pages/published-events-page.tsx";
 // Administrator pages
 import AdministrationDashboardPage from "./pages/administrator/administration-dashboard-page.tsx";
 import AdministrationManageUsersPage from "./pages/administrator/administration-manage-users-page.tsx";
+import AdministrationUserDetailsPage from "./pages/administrator/administration-user-details-page.tsx";
 
 // Organizer pages
 import OrganizerEventsListpage from "./pages/organizer/organizer-events-list-page.tsx";
@@ -103,6 +104,17 @@ export const router = createBrowserRouter([
       <Layout>
         <ProtectedRoute allowedRoles={['administrator']}>
           <AdministrationManageUsersPage />
+        </ProtectedRoute>
+      </Layout>
+    ),
+  },
+
+  {
+    path: "/dashboard/administration/manage-users/:attendeeId",
+    element: (
+      <Layout>
+        <ProtectedRoute allowedRoles={['administrator']}>
+          <AdministrationUserDetailsPage />
         </ProtectedRoute>
       </Layout>
     ),

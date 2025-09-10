@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.Hoang105.tickets.domain.entities.*;
-
+import com.Hoang105.tickets.domain.entities.enums.EventStatusEnum;
 import lombok.*;
 
 @Data

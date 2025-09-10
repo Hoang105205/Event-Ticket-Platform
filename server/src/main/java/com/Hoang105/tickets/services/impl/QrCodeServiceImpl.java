@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import org.springframework.stereotype.Service;
 
 import com.Hoang105.tickets.domain.entities.QrCode;
-import com.Hoang105.tickets.domain.entities.QrCodeStatusEnum;
+import com.Hoang105.tickets.domain.entities.enums.QrCodeStatusEnum;
 import com.Hoang105.tickets.domain.entities.Ticket;
 import com.Hoang105.tickets.exceptions.QrCodeGenerationException;
 import com.Hoang105.tickets.exceptions.QrCodeNotFoundException;

@@ -1,6 +1,6 @@
 package com.Hoang105.tickets.mappers;
 
-import com.Hoang105.tickets.domain.dtos.TicketValidationResponseDto;
+import com.Hoang105.tickets.domain.dtos.Staff.TicketValidationResponseDto;
 import com.Hoang105.tickets.domain.entities.TicketValidation;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

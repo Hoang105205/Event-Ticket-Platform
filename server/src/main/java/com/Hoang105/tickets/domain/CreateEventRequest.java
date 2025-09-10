@@ -4,8 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.Hoang105.tickets.domain.entities.*;
-
+import com.Hoang105.tickets.domain.entities.enums.EventStatusEnum;
 import lombok.*;
 
 @Data

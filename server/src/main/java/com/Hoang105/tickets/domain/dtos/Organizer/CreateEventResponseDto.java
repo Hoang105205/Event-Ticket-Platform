@@ -1,9 +1,9 @@
-package com.Hoang105.tickets.domain.dtos;
+package com.Hoang105.tickets.domain.dtos.Organizer;
 
 import java.util.List;
 import java.util.UUID;
 
-import com.Hoang105.tickets.domain.entities.EventStatusEnum;
+import com.Hoang105.tickets.domain.entities.enums.EventStatusEnum;
 
 import java.time.*;
 

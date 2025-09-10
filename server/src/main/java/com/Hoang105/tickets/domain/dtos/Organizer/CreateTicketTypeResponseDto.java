@@ -1,4 +1,4 @@
-package com.Hoang105.tickets.domain.dtos;
+package com.Hoang105.tickets.domain.dtos.Organizer;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetEventDetailsTicketTypeResponseDto {
+public class CreateTicketTypeResponseDto {
     private UUID id;
     private String name;
     private Double price;
@@ -18,4 +18,5 @@ public class GetEventDetailsTicketTypeResponseDto {
     private Integer totalAvailable;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
 }

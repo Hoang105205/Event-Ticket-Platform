@@ -3,6 +3,7 @@ package com.Hoang105.tickets.domain.entities;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.Hoang105.tickets.domain.entities.enums.QrCodeStatusEnum;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 

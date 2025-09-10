@@ -15,4 +15,5 @@ public interface UserService {
 
     LocalDateTime lastPurchaseDate(UUID id);
 
+    User getUserById(UUID id);
 }

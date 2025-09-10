@@ -1,10 +1,9 @@
-package com.Hoang105.tickets.domain.dtos;
+package com.Hoang105.tickets.domain.dtos.Organizer;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
-import com.Hoang105.tickets.domain.entities.EventStatusEnum;
+import com.Hoang105.tickets.domain.entities.enums.EventStatusEnum;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -18,10 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateEventRequestDto {
-
-    @NotNull(message = "Event ID must be provided")
-    private UUID id;
+public class CreateEventRequestDto {
 
     @NotBlank(message = "Event name is required")
     private String name;
@@ -42,5 +38,5 @@ public class UpdateEventRequestDto {
 
     @NotEmpty(message = "At least one ticket type is required")
     @Valid
-    private List<UpdateTicketTypeRequestDto> ticketTypes;
+    private List<CreateTicketTypeRequestDto> ticketTypes;
 }

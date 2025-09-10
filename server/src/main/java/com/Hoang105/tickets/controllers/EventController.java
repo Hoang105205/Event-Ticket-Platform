@@ -2,6 +2,12 @@ package com.Hoang105.tickets.controllers;
 
 import java.util.UUID;
 
+import com.Hoang105.tickets.domain.dtos.Organizer.CreateEventRequestDto;
+import com.Hoang105.tickets.domain.dtos.Organizer.CreateEventResponseDto;
+import com.Hoang105.tickets.domain.dtos.Organizer.UpdateEventRequestDto;
+import com.Hoang105.tickets.domain.dtos.Organizer.UpdateEventResponseDto;
+import com.Hoang105.tickets.domain.dtos.Organizer.GetEventDetailsResponseDto;
+import com.Hoang105.tickets.domain.dtos.Organizer.ListEventResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -11,7 +17,6 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import com.Hoang105.tickets.domain.*;
-import com.Hoang105.tickets.domain.dtos.*;
 import com.Hoang105.tickets.mappers.*;
 import com.Hoang105.tickets.services.*;
 import com.Hoang105.tickets.utils.JwtUtil;

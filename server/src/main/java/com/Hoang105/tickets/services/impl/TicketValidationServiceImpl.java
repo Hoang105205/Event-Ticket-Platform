@@ -1,6 +1,9 @@
 package com.Hoang105.tickets.services.impl;
 
 import com.Hoang105.tickets.domain.entities.*;
+import com.Hoang105.tickets.domain.entities.enums.QrCodeStatusEnum;
+import com.Hoang105.tickets.domain.entities.enums.TicketValidationEnum;
+import com.Hoang105.tickets.domain.entities.enums.TicketValidationMethodEnum;
 import com.Hoang105.tickets.exceptions.QrCodeNotFoundException;
 import com.Hoang105.tickets.exceptions.TicketNotFoundException;
 import com.Hoang105.tickets.repositories.QrCodeRepository;

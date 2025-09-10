@@ -10,8 +10,9 @@ import {
   TicketSummary,
   TicketValidationRequest,
   TicketValidationResponse,
-  UpdateEventRequest,
+  UpdateEventRequest, 
   UserGeneralProfile,
+  UserDetailProfile, UserTicketDetails,
 } from "@/domain/domain";
 import api from "@/config/axios";
 
@@ -30,7 +31,7 @@ export const createEvent = async (
       throw new Error(error.response.data.error);
     } else {
       console.error(error);
-      throw new Error("An unknown error occurred");
+      throw new Error("An any error occurred");
     }
   }
 };
@@ -51,7 +52,7 @@ export const updateEvent = async (
       throw new Error(error.response.data.error);
     } else {
       console.error(error);
-      throw new Error("An unknown error occurred");
+      throw new Error("An any error occurred");
     }
   }
 };
@@ -72,7 +73,7 @@ export const listEvents = async (
       throw new Error(error.response.data.error);
     } else {
       console.error(error);
-      throw new Error("An unknown error occurred");
+      throw new Error("An any error occurred");
     }
   }
 };
@@ -93,7 +94,7 @@ export const getEvent = async (
       throw new Error(error.response.data.error);
     } else {
       console.error(error);
-      throw new Error("An unknown error occurred");
+      throw new Error("An any error occurred");
     }
   }
 };
@@ -113,7 +114,7 @@ export const deleteEvent = async (
       throw new Error(error.response.data.error);
     } else {
       console.error(error);
-      throw new Error("An unknown error occurred");
+      throw new Error("An any error occurred");
     }
   }
 };
@@ -129,7 +130,7 @@ export const listPublishedEvents = async (
       throw new Error(error.response.data.error);
     } else {
       console.error(error);
-      throw new Error("An unknown error occurred");
+      throw new Error("An any error occurred");
     }
   }
 };
@@ -148,7 +149,7 @@ export const searchPublishedEvents = async (
       throw new Error(error.response.data.error);
     } else {
       console.error(error);
-      throw new Error("An unknown error occurred");
+      throw new Error("An any error occurred");
     }
   }
 };
@@ -164,7 +165,7 @@ export const getPublishedEvent = async (
       throw new Error(error.response.data.error);
     } else {
       console.error(error);
-      throw new Error("An unknown error occurred");
+      throw new Error("An any error occurred");
     }
   }
 };
@@ -189,7 +190,7 @@ export const purchaseTicket = async (
       throw new Error(error.response.data.error);
     } else {
       console.error(error);
-      throw new Error("An unknown error occurred");
+      throw new Error("An any error occurred");
     }
   }
 };
@@ -210,7 +211,7 @@ export const listTickets = async (
       throw new Error(error.response.data.error);
     } else {
       console.error(error);
-      throw new Error("An unknown error occurred");
+      throw new Error("An any error occurred");
     }
   }
 };
@@ -231,7 +232,7 @@ export const getTicket = async (
       throw new Error(error.response.data.error);
     } else {
       console.error(error);
-      throw new Error("An unknown error occurred");
+      throw new Error("An any error occurred");
     }
   }
 };
@@ -270,7 +271,7 @@ export const validateTicket = async (
       throw new Error(error.response.data.error);
     } else {
       console.error(error);
-      throw new Error("An unknown error occurred");
+      throw new Error("An any error occurred");
     }
   }
 };
@@ -295,7 +296,61 @@ export const fetchAttendeeList = async (
       throw new Error(error.response.data.error);
     } else {
       console.error(error);
-      throw new Error("An unknown error occurred");
+      throw new Error("An any error occurred");
+    }
+  }
+};
+
+export const getAttendeeDetails = async (
+  accessToken: string,
+  userId: string
+): Promise<UserDetailProfile> => {
+  try {
+    
+    const response = await api.get(
+      `/api/v1/users/attendees/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+      }
+    );
+    
+    return response.data as UserDetailProfile;
+    
+  } catch (error: any) {
+    if (error.response?.data && isErrorResponse(error.response.data)) {
+      throw new Error(error.response.data.error);
+    } else {
+      console.error(error);
+      throw new Error("An any error occurred");
+    }
+  }
+};
+
+export const getAttendeeTicketDetails = async (
+  accessToken: string,
+  userId: string,
+  page: number = 0,
+  size: number = 10
+): Promise<SpringBootPagination<UserTicketDetails>> => {
+  try {
+    const response = await api.get(
+      `/api/v1/users/attendees/${userId}/tickets?page=${page}&size=${size}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response.data as SpringBootPagination<UserTicketDetails>;
+  }
+  catch (error: any) {
+    if (error.response?.data && isErrorResponse(error.response.data)) {
+      throw new Error(error.response.data.error);
+    }
+    else {
+      console.error(error);
+      throw new Error("An any error occurred");
     }
   }
 };

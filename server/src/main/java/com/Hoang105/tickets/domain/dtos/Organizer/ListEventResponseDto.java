@@ -1,10 +1,10 @@
-package com.Hoang105.tickets.domain.dtos;
+package com.Hoang105.tickets.domain.dtos.Organizer;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.Hoang105.tickets.domain.entities.EventStatusEnum;
+import com.Hoang105.tickets.domain.entities.enums.EventStatusEnum;
 
 
 import lombok.AllArgsConstructor;
