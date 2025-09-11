@@ -237,6 +237,30 @@ export const getTicket = async (
   }
 };
 
+export const cancelTicket = async (
+  accessToken: string,
+  id: string,
+): Promise<void> => {
+  try {
+    await api.put(`/api/v1/tickets/${id}/cancel-ticket`, 
+      {}, 
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+  } catch (error: any) {
+    if (error.response?.data && isErrorResponse(error.response.data)) {
+      throw new Error(error.response.data.error);
+    }
+    else {
+      console.error(error);
+      throw new Error("An any error occurred");
+    }
+  }
+};
+
 export const getTicketQr = async (
   accessToken: string,
   id: string,

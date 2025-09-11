@@ -3,6 +3,7 @@ package com.Hoang105.tickets.services.impl;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.Hoang105.tickets.domain.entities.enums.TicketStatusEnum;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,5 +28,15 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public Optional<Ticket> getTicketForUser(UUID userId, UUID ticketId){
         return ticketRepository.findByIdAndPurchaserId(ticketId, userId);
+    }
+
+    @Override
+    public Optional<Ticket> cancelTicket(UUID userId, UUID ticketId){
+        Optional<Ticket> ticketOpt = ticketRepository.findByIdAndPurchaserId(ticketId, userId);
+        ticketOpt.ifPresent(ticket -> {
+            ticket.setStatus(TicketStatusEnum.CANCELLED);
+            ticketRepository.save(ticket);
+        });
+        return ticketOpt;
     }
 }

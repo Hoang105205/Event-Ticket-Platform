@@ -12,5 +12,8 @@ public interface TicketService {
     Page<Ticket> listTicketForUser(UUID userId, Pageable pageable);
 
     Optional<Ticket> getTicketForUser(UUID userId, UUID ticketId);
-    
+
+    Optional<Ticket> cancelTicket(UUID userId, UUID ticketId);
+
+
 } 

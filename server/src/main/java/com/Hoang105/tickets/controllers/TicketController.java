@@ -1,5 +1,6 @@
 package com.Hoang105.tickets.controllers;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -9,10 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.Hoang105.tickets.domain.dtos.Attendee.GetTicketResponseDto;
 import com.Hoang105.tickets.domain.dtos.Attendee.ListTicketResponseDto;
@@ -79,6 +77,23 @@ public class TicketController {
         return ResponseEntity.ok()
                             .headers(headers)
                             .body(qrCodeImage);
+
+    }
+
+    @PutMapping(path = "/{ticketId}/cancel-ticket")
+    public ResponseEntity<Void> cancelTicket(
+        @AuthenticationPrincipal Jwt jwt,
+        @PathVariable UUID ticketId){
+
+        UUID userId = JwtUtil.parseUserId(jwt);
+
+        Optional<Ticket> canceledTicket = ticketService.cancelTicket(userId, ticketId);
+
+        if (canceledTicket.isPresent()){
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
 
     }
 
