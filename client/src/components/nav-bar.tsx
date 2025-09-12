@@ -161,20 +161,20 @@ const NavBar: React.FC = () => {
               // Enhanced User dropdown
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button 
-                    variant="ghost" 
-                    className="relative h-10 w-10 rounded-full border border-gray-600/50 hover:border-purple-500/50 bg-gradient-to-br from-gray-800 to-gray-900 hover:from-purple-900/30 hover:to-pink-900/30 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-500/20"
+                  <button
+                    type="button"
+                    className="relative flex items-center justify-center h-10 w-10 rounded-full border border-gray-600/50 hover:border-purple-500/50 bg-gradient-to-br from-gray-800 to-gray-900 hover:from-purple-900/30 hover:to-pink-900/30 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-500/20"
                   >
-                    <Avatar className="h-8 w-8">
-                      <AvatarFallback className="bg-gradient-to-br from-purple-600 to-pink-600 text-white font-semibold">
-                        {user?.profile?.preferred_username
-                          ?.slice(0, 2)
-                          .toUpperCase() || "U"}
-                      </AvatarFallback>
-                    </Avatar>
-                    {/* Online indicator */}
-                    <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-gray-900 animate-pulse"></div>
-                  </Button>
+                    <span className="relative flex items-center justify-center h-8 w-8">
+                      <Avatar className="h-8 w-8">
+                        <AvatarFallback className="bg-gradient-to-br from-purple-600 to-pink-600 text-white font-semibold">
+                          {user?.profile?.preferred_username?.slice(0, 2).toUpperCase() || "U"}
+                        </AvatarFallback>
+                      </Avatar>
+                      {/* Online indicator */}
+                      <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-gray-900 animate-pulse"></span>
+                    </span>
+                  </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
                   className="w-64 bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-600/50 text-white shadow-xl shadow-purple-500/10 backdrop-blur-xl animate-fade-in"

@@ -15,5 +15,7 @@ public interface TicketService {
 
     Optional<Ticket> cancelTicket(UUID userId, UUID ticketId);
 
+    int countTotalTicketsSold();
 
+    int countTotalTicketsRemaining();
 } 

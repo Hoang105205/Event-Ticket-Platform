@@ -19,4 +19,7 @@ public interface TicketTypeRepository extends JpaRepository<TicketType, UUID> {
     @Query("SELECT tt FROM TicketType tt WHERE tt.id = :id")
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     Optional<TicketType> findByIdWithLock(@Param("id") UUID id);
+
+    @Query("SELECT SUM(tt.totalAvailable) FROM TicketType tt")
+    int sumTotalAvailable();
 }

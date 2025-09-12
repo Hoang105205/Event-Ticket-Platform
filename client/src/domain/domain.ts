@@ -226,4 +226,15 @@ export interface UserTicketDetails {
   ticketType_event_end: Date;
 }
 
+export interface PlatformStatistics {
+  totalAttendees: number;
+  totalEvents: number;
+  publishedEvents: number;
+  draftEvents: number;
+  totalTicketsSold: number;
+  totalTicketsRemaining: number;
+  newAttendeesThisWeek: number;
+  newAttendeesThisMonth: number;
+}
+
 

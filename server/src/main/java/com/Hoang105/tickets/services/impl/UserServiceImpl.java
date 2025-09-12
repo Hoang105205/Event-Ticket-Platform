@@ -45,5 +45,28 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(UserNotFoundException::new);
     }
 
+    @Override
+    public int countTotalAttendees() {
+        return userRepository.countByRole(UserRoleEnum.ATTENDEE);
+    }
+
+    @Override
+    public int countNewAttendeesThisWeek() {
+        LocalDateTime oneWeekAgo = LocalDateTime.now().minusWeeks(1);
+        return (int) userRepository.findAll().stream()
+                .filter(user -> user.getRole() == UserRoleEnum.ATTENDEE)
+                .filter(user -> user.getCreatedAt().isAfter(oneWeekAgo))
+                .count();
+    };
+
+    @Override
+    public int countNewAttendeesThisMonth() {
+        LocalDateTime oneMonthAgo = LocalDateTime.now().minusMonths(1);
+        return (int) userRepository.findAll().stream()
+                .filter(user -> user.getRole() == UserRoleEnum.ATTENDEE)
+                .filter(user -> user.getCreatedAt().isAfter(oneMonthAgo))
+                .count();
+    }
+
 
 }

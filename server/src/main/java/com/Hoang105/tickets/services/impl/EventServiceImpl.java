@@ -172,4 +172,15 @@ public class EventServiceImpl implements EventService {
     public Optional<Event> getPublishedEvent(UUID id){
         return eventRepository.findByIdAndStatus(id, EventStatusEnum.PUBLISHED);
     }
+
+    @Override
+    public int countTotalEvents(){
+        return (int) eventRepository.count();
+    }
+
+    @Override
+    public int countEventsByStatus(EventStatusEnum status){
+        return (int) eventRepository.countByStatus(status);
+    }
+
 }

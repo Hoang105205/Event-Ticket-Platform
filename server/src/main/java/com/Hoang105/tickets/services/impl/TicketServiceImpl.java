@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.Hoang105.tickets.domain.entities.enums.TicketStatusEnum;
+import com.Hoang105.tickets.repositories.TicketTypeRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class TicketServiceImpl implements TicketService {
 
     private final TicketRepository ticketRepository;
+    private final TicketTypeRepository ticketTypeRepository;
 
     @Override
     public Page<Ticket> listTicketForUser(UUID userId, Pageable pageable){
@@ -38,5 +40,17 @@ public class TicketServiceImpl implements TicketService {
             ticketRepository.save(ticket);
         });
         return ticketOpt;
+    }
+
+    @Override
+    public int countTotalTicketsSold(){
+        return ticketRepository.countByStatus(TicketStatusEnum.PURCHASED);
+    }
+
+    @Override
+    public int countTotalTicketsRemaining(){
+        int totalAvailable = ticketTypeRepository.sumTotalAvailable();
+        int totalSold = ticketRepository.countByStatus(TicketStatusEnum.PURCHASED);
+        return totalAvailable - totalSold;
     }
 }

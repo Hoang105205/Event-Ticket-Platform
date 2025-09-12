@@ -13,6 +13,7 @@ import {
   UpdateEventRequest, 
   UserGeneralProfile,
   UserDetailProfile, UserTicketDetails,
+  PlatformStatistics,
 } from "@/domain/domain";
 import api from "@/config/axios";
 
@@ -378,3 +379,29 @@ export const getAttendeeTicketDetails = async (
     }
   }
 };
+
+
+export const getPlatformStatistics = async (
+  accessToken: string
+): Promise<PlatformStatistics> => {
+  try {
+    const response = await api.get(
+      `/api/v1/admin`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response.data as PlatformStatistics;
+  } catch (error: any) {
+    if (error.response?.data && isErrorResponse(error.response.data)) {
+      throw new Error(error.response.data.error);
+    }
+    else {
+      console.error(error);
+      throw new Error("An any error occurred");
+    }
+  }
+};
+

@@ -3,6 +3,7 @@ package com.Hoang105.tickets.services;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.Hoang105.tickets.domain.entities.enums.EventStatusEnum;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -27,4 +28,9 @@ public interface EventService {
     Page<Event> searchPublishedEvents(String query, Pageable pageable);
 
     Optional<Event> getPublishedEvent(UUID id);
+
+    int countTotalEvents();
+
+    int countEventsByStatus(EventStatusEnum status);
+
 }

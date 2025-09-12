@@ -3,6 +3,7 @@ package com.Hoang105.tickets.repositories;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.Hoang105.tickets.domain.entities.enums.TicketStatusEnum;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,4 +22,6 @@ public interface TicketRepository extends JpaRepository<Ticket, UUID> {
     Integer countByPurchaserId(UUID purchaserId);
 
     Optional<Ticket> findFirstByPurchaserIdOrderByCreatedAtDesc(UUID purchaserId);
+
+    int countByStatus(TicketStatusEnum status);
 }

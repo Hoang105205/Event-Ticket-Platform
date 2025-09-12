@@ -14,4 +14,6 @@ import com.Hoang105.tickets.domain.entities.User;
 public interface UserRepository extends JpaRepository<User, UUID> {
     Page<User> findAllByRole(UserRoleEnum role, Pageable pageable);
 
+    int countByRole(UserRoleEnum role);
+
 }

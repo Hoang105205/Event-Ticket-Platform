@@ -3,6 +3,7 @@ package com.Hoang105.tickets.repositories;
 import com.Hoang105.tickets.domain.entities.Event;
 import com.Hoang105.tickets.domain.entities.enums.EventStatusEnum;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -35,6 +36,8 @@ public interface EventRepository extends JpaRepository<Event, UUID> {
        nativeQuery = true)
     Page<Event> searchEvents(@Param("searchTerm") String searchTerm, Pageable pageable);
 
-
     Optional<Event> findByIdAndStatus(UUID id, EventStatusEnum status);
+
+    int countByStatus(EventStatusEnum status);
+
 }
