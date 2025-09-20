@@ -40,4 +40,4 @@ jobs:
 
       - name: Run tests
         working-directory: server
-        run: ./mvnw test
+        run: ./mvnw test -Dspring.profiles.active=test
