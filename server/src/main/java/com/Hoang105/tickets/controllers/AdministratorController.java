@@ -3,6 +3,8 @@ package com.Hoang105.tickets.controllers;
 import com.Hoang105.tickets.domain.dtos.Administrator.PlatformStatisticsResponseDto;
 import com.Hoang105.tickets.domain.entities.enums.EventStatusEnum;
 import com.Hoang105.tickets.services.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Administrator", description = "Operations related to administrator, accessible by administrators only")
 @RequestMapping("/api/v1/admin")
 public class AdministratorController {
 
@@ -21,6 +24,7 @@ public class AdministratorController {
     private final TicketService ticketService;
 
     @GetMapping
+    @Operation(summary = "Get platform statistics", description = "Retrieve various statistics about the platform")
     public ResponseEntity<PlatformStatisticsResponseDto> getPlatformStatistics(
             @AuthenticationPrincipal Jwt jwt){
 

@@ -47,6 +47,11 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize ->
                 authorize
                     .requestMatchers(HttpMethod.GET, "/api/v1/published-events/**").permitAll()
+                    .requestMatchers(
+                            "/v3/api-docs/**",
+                            "/swagger-ui/**",
+                            "/swagger-ui.html"
+                    ).permitAll()
                     .requestMatchers("/api/v1/users/**").hasRole("ADMINISTRATOR")
                     .requestMatchers("/api/v1/admin/**").hasRole("ADMINISTRATOR")
                     .requestMatchers("/api/v1/events").hasRole("ORGANIZER")

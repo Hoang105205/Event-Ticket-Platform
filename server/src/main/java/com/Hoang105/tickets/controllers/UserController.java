@@ -9,6 +9,8 @@ import com.Hoang105.tickets.mappers.TicketMapper;
 import com.Hoang105.tickets.mappers.UserMapper;
 import com.Hoang105.tickets.services.TicketService;
 import com.Hoang105.tickets.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -27,6 +29,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
+@Tag(name = "User", description = "Operations related to users (attendees), accessible by administrators only")
 @RequestMapping(path = "/api/v1/users")
 @RequiredArgsConstructor
 public class UserController {
@@ -37,6 +40,7 @@ public class UserController {
     private final TicketMapper ticketMapper;
 
     @GetMapping(path = "/attendees")
+    @Operation(summary = "List attendees", description = "Retrieve a paginated list of all attendees with their total tickets purchased and last purchase date")
     public ResponseEntity<Page<ListAttendeesResponseDto>> listAttendees(
             @AuthenticationPrincipal Jwt jwt,
             Pageable pageable) {
@@ -57,6 +61,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/attendees/{attendeeId}")
+    @Operation(summary = "Get attendee details", description = "Retrieve detailed information about a specific attendee by their ID, including total tickets purchased and last purchase date")
     public ResponseEntity<GetAttendeeDetailsResponseDto> getAttendeeDetails(
             @AuthenticationPrincipal Jwt jwt,
             @PathVariable UUID attendeeId) {
@@ -71,6 +76,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/attendees/{attendeeId}/tickets")
+    @Operation(summary = "List tickets for an attendee", description = "Retrieve a paginated list of tickets associated with a specific attendee by their ID")
     public ResponseEntity<Page<ListAttendeeTicketResponseDto>> listTicketsForAttendee(
             @AuthenticationPrincipal Jwt jwt,
             @PathVariable UUID attendeeId,

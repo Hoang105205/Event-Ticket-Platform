@@ -2,6 +2,8 @@ package com.Hoang105.tickets.controllers;
 
 import java.util.UUID;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping(path = "/api/v1/published-events")
+@Tag(name = "Published Events", description = "Operations related to published events")
 @RequiredArgsConstructor
 public class PublishedEventController {
 
@@ -27,6 +30,7 @@ public class PublishedEventController {
     private final EventMapper eventMapper;
 
     @GetMapping
+    @Operation(summary = "List published events", description = "Retrieve a paginated list of published events with optional search query")
     public ResponseEntity<Page<ListPublishedEventResponseDto>> listPublishedEvents(
         @RequestParam(required = false) String q,
         Pageable pageable) {
@@ -45,6 +49,7 @@ public class PublishedEventController {
     }
 
     @GetMapping(path = "/{eventId}")
+    @Operation(summary = "Get published event details", description = "Retrieve detailed information about a specific published event by its ID")
     public ResponseEntity<GetPublishedEventDetailsResponseDto> getPublishedEventDetails(
         @PathVariable UUID eventId) {
 

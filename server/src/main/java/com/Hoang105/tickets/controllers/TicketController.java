@@ -3,6 +3,8 @@ package com.Hoang105.tickets.controllers;
 import java.util.Optional;
 import java.util.UUID;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -24,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/tickets")
+@Tag(name = "Tickets", description = "Operations related to tickets, accessible by authenticated attendees")
 @RequiredArgsConstructor
 public class TicketController {
 
@@ -32,6 +35,7 @@ public class TicketController {
     private final QrCodeService qrCodeService;
 
     @GetMapping
+    @Operation(summary = "List tickets for authenticated attendee", description = "Retrieve a paginated list of tickets associated with the authenticated attendee")
     public ResponseEntity<Page<ListTicketResponseDto>> listTickets(
         @AuthenticationPrincipal Jwt jwt,
         Pageable pageable
@@ -48,6 +52,7 @@ public class TicketController {
     }
 
     @GetMapping(path = "/{ticketId}")
+    @Operation(summary = "Get ticket details", description = "Retrieve detailed information about a specific ticket by its ID for the authenticated attendee")
     public ResponseEntity<GetTicketResponseDto> getTicket(
         @AuthenticationPrincipal Jwt jwt,
         @PathVariable UUID ticketId){
@@ -62,6 +67,7 @@ public class TicketController {
     }
 
     @GetMapping(path = "/{ticketId}/qr-codes")
+    @Operation(summary = "Get ticket QR code", description = "Retrieve the QR code image for a specific ticket by its ID for the authenticated attendee")
     public ResponseEntity<byte[]> getTicketQrCode (
         @AuthenticationPrincipal Jwt jwt,
         @PathVariable UUID ticketId){
@@ -81,6 +87,7 @@ public class TicketController {
     }
 
     @PutMapping(path = "/{ticketId}/cancel-ticket")
+    @Operation(summary = "Cancel a ticket", description = "Cancel a specific ticket by its ID for the authenticated attendee")
     public ResponseEntity<Void> cancelTicket(
         @AuthenticationPrincipal Jwt jwt,
         @PathVariable UUID ticketId){

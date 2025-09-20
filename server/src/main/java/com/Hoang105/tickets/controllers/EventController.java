@@ -8,6 +8,8 @@ import com.Hoang105.tickets.domain.dtos.Organizer.UpdateEventRequestDto;
 import com.Hoang105.tickets.domain.dtos.Organizer.UpdateEventResponseDto;
 import com.Hoang105.tickets.domain.dtos.Organizer.GetEventDetailsResponseDto;
 import com.Hoang105.tickets.domain.dtos.Organizer.ListEventResponseDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
+@Tag(name = "Event", description = "Operations related to events, accessible by authenticated organizers")
 @RequestMapping("/api/v1/events")
 @RequiredArgsConstructor
 public class EventController {
@@ -33,6 +36,7 @@ public class EventController {
     private final EventService eventService;
 
     @PostMapping
+    @Operation(summary = "Create a new event", description = "Create a new event associated with the authenticated organizer")
     public ResponseEntity<CreateEventResponseDto> createEvent(
             @AuthenticationPrincipal Jwt jwt,
             @Valid @RequestBody CreateEventRequestDto createEventRequestDto){
@@ -47,6 +51,7 @@ public class EventController {
         return new ResponseEntity<>(createEventResponseDto, HttpStatus.CREATED);
     }
 
+    @Operation(summary = "Update an existing event", description = "Update details of an existing event associated with the authenticated organizer")
     @PutMapping(path = "/{eventId}")
     public ResponseEntity<UpdateEventResponseDto> updateEvent(
             @AuthenticationPrincipal Jwt jwt,
@@ -63,6 +68,7 @@ public class EventController {
         return new ResponseEntity<>(updateEventResponseDto, HttpStatus.OK);
     }
 
+    @Operation(summary = "List events created by the authenticated organizer", description = "Retrieve a paginated list of events created by the authenticated organizer")
     @GetMapping
     public ResponseEntity<Page<ListEventResponseDto>> listEvents(
         @AuthenticationPrincipal Jwt jwt, Pageable pageable){
@@ -76,6 +82,7 @@ public class EventController {
         );
     }
 
+    @Operation(summary = "Get event details created by the authenticated organizer", description = "Retrieve detailed information about a specific event created by the authenticated organizer")
     @GetMapping(path = "/{eventId}")
     public ResponseEntity<GetEventDetailsResponseDto> getEvent(
         @AuthenticationPrincipal Jwt jwt,
@@ -89,6 +96,7 @@ public class EventController {
             .orElse(ResponseEntity.notFound().build());
     }
 
+    @Operation(summary = "Delete an event created by the authenticated organizer", description = "Delete a specific event created by the authenticated organizer")
     @DeleteMapping(path = "/{eventId}")
     public ResponseEntity<Void> deleteEvent(
         @AuthenticationPrincipal Jwt jwt,
@@ -100,11 +108,4 @@ public class EventController {
 
         return ResponseEntity.noContent().build();
     }
-   
-
-    
-
-
-
-
 }
